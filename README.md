@@ -14,18 +14,11 @@ The yum-sensu cookbook takes over management of the default repositoryids used w
 The following attributes are set by default
 
 ```ruby
-default['yum']['sensu']['description'] = 'sensu Repository'
-default['yum']['sensu']['baseurl'] = 'https://dl.bintray.com/sensu/sensu-server-rpm'
+default['yum']['sensu']['description'] = 'Sensu Repository'
+default['yum']['sensu']['baseurl'] = 'https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/'
 default['yum']['sensu']['gpgcheck'] = false
 default['yum']['sensu']['enabled'] = true
 default['yum']['sensu']['managed'] = true
-
-default['yum']['sensu-erlang']['description'] = 'sensu Erlang Repository'
-default['yum']['sensu-erlang']['baseurl'] = 'https://dl.bintray.com/sensu/erlang'
-default['yum']['sensu-erlang']['gpgcheck'] = false
-default['yum']['sensu-erlang']['enabled'] = true
-default['yum']['sensu-erlang']['managed'] = true
-default['yum']['sensu-erlang']['includepkgs'] = "*.el#{platform_version.to_i}.*"
 ```
 
 ## Recipes
@@ -35,18 +28,10 @@ default['yum']['sensu-erlang']['includepkgs'] = "*.el#{platform_version.to_i}.*"
 
 ```ruby
   yum_repository 'sensu' do
-    baseurl 'https://dl.bintray.com/sensu/sensu-server-rpm'
-    description 'sensu Repository'
+    baseurl 'https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/m'
+    description 'Sensu Repository'
     enabled true
     gpgcheck false
-  end
-
-  yum_repository 'sensu-erlang' do
-    baseurl 'https://dl.bintray.com/sensu/erlang'
-    description 'sensu Erlang Repository'
-    enabled true
-    gpgcheck false
-    includepkgs '*.el7.*'
   end
 ```
 
